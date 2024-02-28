@@ -1,4 +1,5 @@
 import pytest
+import logging
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
@@ -11,3 +12,11 @@ def driver():
         driver.get("https://google.com")
         yield driver
 
+
+def logger(level):
+    logger = logging.getLogger(__name__)
+    file_handler = logging.FileHandler("logger.log")
+    formatter = logging.Formatter("%(asctime)s :% (levelname)s : % (name)s : %(message)s")
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+    logger.setLevel(level)
